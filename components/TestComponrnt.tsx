@@ -1,11 +1,7 @@
 "use client";
 
 const TestComponent = () => {
-  return (
-    <div className="w-[200px] h-[50px] bg-primary text-large">
-      <div className="testStyle">TEST</div>
-    </div>
-  );
+  return <div className=" w-[200px] h-[50px] bg-primary">test</div>;
 };
 
 export default TestComponent;
