@@ -1,3 +1,5 @@
+import TestComponent from "@/components/TestComponrnt";
+
 const Page = () => {
   return (
     <div className="">
@@ -10,6 +12,7 @@ const Page = () => {
         TEST2
       </h1>
       <div className="rounded-5xl border-primary max-h-[100px]"></div>
+      <TestComponent />
     </div>
   );
 };
