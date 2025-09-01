@@ -4,8 +4,6 @@
 @import "../style/testCss.scss";
 @import "../style/shadcn.css";
 
-/* @import "tw-animate-css"; */
-/* @plugin "tailwindcss-animate"; */
 @custom-variant dark (&: is(.dark *));
 
 /* 1rem = 10px */
