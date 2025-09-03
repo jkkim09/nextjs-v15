@@ -121,15 +121,15 @@ const Page = () => {
 
       <div>
         <div>Count: {count}</div>
-        <button onClick={() => dispatch(counterActions.increment())}>
+        <Button onClick={() => dispatch(counterActions.increment())}>
           증가
-        </button>
-        <button onClick={() => dispatch(counterActions.decrement())}>
+        </Button>
+        <Button onClick={() => dispatch(counterActions.decrement())}>
           감소
-        </button>
-        <button onClick={() => dispatch(counterActions.incrementByAmount(5))}>
+        </Button>
+        <Button onClick={() => dispatch(counterActions.incrementByAmount(5))}>
           +5
-        </button>
+        </Button>
       </div>
       <Tooltip content="This is a tooltip">
         <button>Hover me</button>
@@ -143,6 +143,10 @@ const Page = () => {
       <div className="bg-primary text-sm">test</div>
       <div className="bg-primary text-md font-secondary">test</div>
       <div className="bg-primary text-lg font-primary">test</div>
+      <div className="w-[300px] h-[200px] bg-secondary p-[20px] ">
+        <div>TestSelect</div>
+      </div>
+      <h1 className="h1">TEST H1</h1>
     </div>
   );
 };
