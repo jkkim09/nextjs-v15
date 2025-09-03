@@ -3,15 +3,25 @@
 import Button from '@/components/Button';
 import LucideIcon from '@/components/common/Icon';
 import { Skeleton } from '@/components/common/Skeleton';
-import Table from '@/components/common/Table';
+import Table, { TableHeader } from '@/components/common/Table';
 import TestComponent from '@/components/TestComponrnt';
 import TestSelect from '@/components/TestSelect';
+import { counterActions } from '@/stores/counterSlice';
+import { AppDispatch, RootState } from '@/stores/store';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface User {
   id: number;
   name: string;
   email: string;
   isActive: boolean;
+}
+
+interface User2 {
+  id: number;
+  name: string;
+  age: number;
+  city: string;
 }
 
 // 사용자 활성화 상태를 표시하는 커스텀 컴포넌트
@@ -24,6 +34,9 @@ const StatusComponent: React.FC<{ row: User }> = ({ row }) => {
 };
 
 const Page = () => {
+  const count = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch<AppDispatch>();
+
   const users: User[] = [
     { id: 1, name: '김민준', email: 'kim.minjun@example.com', isActive: true },
     {
@@ -45,6 +58,18 @@ const Page = () => {
       label: '상태',
       render: StatusComponent,
     },
+  ];
+
+  const headers2: TableHeader<User2>[] = [
+    { key: 'id', label: 'ID', colSpan: 2 },
+    { key: 'name', label: '이름' },
+    { key: 'age', label: '나이' },
+    { key: 'city', label: '도시' },
+  ];
+
+  const data2: User2[] = [
+    { id: 1, name: '홍길동', age: 25, city: '서울' },
+    { id: 2, name: '김철수', age: 30, city: '부산' },
   ];
 
   return (
@@ -86,7 +111,21 @@ const Page = () => {
       </Button>
       <Skeleton />
       <Table headers={userHeaders} data={users} />
+      <Table headers={headers2} data={data2} />
       <LucideIcon name={'Cat'} fill="yellow" color={'red'} />
+
+      <div>
+        <div>Count: {count}</div>
+        <button onClick={() => dispatch(counterActions.increment())}>
+          증가
+        </button>
+        <button onClick={() => dispatch(counterActions.decrement())}>
+          감소
+        </button>
+        <button onClick={() => dispatch(counterActions.incrementByAmount(5))}>
+          +5
+        </button>
+      </div>
     </div>
   );
 };

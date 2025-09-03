@@ -1,8 +1,8 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-@import "../style/theme.css";
-@import "../style/testCss.scss";
-@import "../style/shadcn.css";
+@import '../style/theme.css';
+@import '../style/testCss.scss';
+@import '../style/shadcn.css';
 
 @custom-variant dark (&: is(.dark *));
 

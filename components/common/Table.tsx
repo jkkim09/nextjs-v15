@@ -8,8 +8,9 @@ export interface TableHeader<T> {
   // render 속성을 추가하여 셀을 커스텀 컴포넌트로 렌더링
   // row: 현재 행의 데이터, index: 행의 인덱스
   render?: React.FC<{ row: T; index: number }>;
+  colSpan?: number; // 추가
+  rowSpan?: number; // 추가
 }
-
 export interface TableProps<T> {
   headers: TableHeader<T>[];
   data: T[];
@@ -22,7 +23,13 @@ const Table = <T extends object>({ headers, data }: TableProps<T>) => {
         <thead>
           <tr>
             {headers.map((header) => (
-              <th key={String(header.key)}>{header.label}</th>
+              <th
+                key={String(header.key)}
+                colSpan={header.colSpan}
+                rowSpan={header.rowSpan}
+              >
+                {header.label}
+              </th>
             ))}
           </tr>
         </thead>
@@ -30,7 +37,11 @@ const Table = <T extends object>({ headers, data }: TableProps<T>) => {
           {data.map((item, rowIndex) => (
             <tr key={rowIndex}>
               {headers.map((header) => (
-                <td key={String(header.key)}>
+                <td
+                  key={String(header.key)}
+                  // colSpan={header.colSpan}
+                  // rowSpan={header.rowSpan}
+                >
                   {header.render ? (
                     // render 속성이 있으면 해당 컴포넌트를 렌더링
                     <header.render row={item} index={rowIndex} />
