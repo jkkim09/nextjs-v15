@@ -2,13 +2,12 @@
 import type { Metadata } from 'next';
 
 // 동적 메타데이터
-export async function generateMetadata(
-  {
-    //   params,
-  }: {
-    params: { slug: string };
-  }
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
+  //   {
+  //       params,
+  //   }: {
+  //     params: { slug: string };
+  //   }
   // ... (API 호출 등)
   //   const article = await getArticle(params.slug);
   const article = {
@@ -22,13 +21,12 @@ export async function generateMetadata(
   };
 }
 
-export default async function ArticlePage(
-  {
-    //   params,
-  }: {
-    params: { slug: string };
-  }
-) {
+export default async function ArticlePage() {
+//   {
+//       params,
+//   }: {
+//     params: { slug: string };
+//   }
   //   const article = await getArticle(params.slug);
   const article = {
     title: 'Sample Article',
