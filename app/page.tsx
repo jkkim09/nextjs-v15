@@ -1,10 +1,53 @@
 'use client';
 
 import Button from '@/components/Button';
+import LucideIcon from '@/components/common/Icon';
+import { Skeleton } from '@/components/common/Skeleton';
+import Table from '@/components/common/Table';
+import { ToastDemo } from '@/components/common/Toast';
 import TestComponent from '@/components/TestComponrnt';
 import TestSelect from '@/components/TestSelect';
 
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  isActive: boolean;
+}
+
+// 사용자 활성화 상태를 표시하는 커스텀 컴포넌트
+const StatusComponent: React.FC<{ row: User }> = ({ row }) => {
+  const statusColor = row.isActive ? 'green' : 'red';
+  const statusText = row.isActive ? 'Active' : 'Inactive';
+  return (
+    <span style={{ color: statusColor, fontWeight: 'bold' }}>{statusText}</span>
+  );
+};
+
 const Page = () => {
+  const users: User[] = [
+    { id: 1, name: '김민준', email: 'kim.minjun@example.com', isActive: true },
+    {
+      id: 2,
+      name: '이서연',
+      email: 'lee.seoyeon@example.com',
+      isActive: false,
+    },
+    { id: 3, name: '박하준', email: 'park.hajun@example.com', isActive: true },
+  ];
+
+  const userHeaders = [
+    { key: 'id' as const, label: 'ID' },
+    { key: 'name' as const, label: '이름' },
+    { key: 'email' as const, label: '이메일' },
+    // 'isActive' 컬럼에 커스텀 컴포넌트(StatusComponent)를 사용
+    {
+      key: 'isActive' as const,
+      label: '상태',
+      render: StatusComponent,
+    },
+  ];
+
   return (
     <div className="flex flex-col p-[100px]">
       <h1 className="text-large">TEST</h1>
@@ -42,6 +85,10 @@ const Page = () => {
       <Button outline={true} onClick={() => alert('test')}>
         Button2
       </Button>
+      <Skeleton />
+      <ToastDemo />
+      <Table headers={userHeaders} data={users} />
+      <LucideIcon name={'Cat'} fill="yellow" />
     </div>
   );
 };
