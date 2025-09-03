@@ -1,6 +1,6 @@
 'use client';
 
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 import LucideIcon from '@/components/common/Icon';
 import { Skeleton } from '@/components/common/Skeleton';
 import Table, { TableHeader } from '@/components/common/Table';

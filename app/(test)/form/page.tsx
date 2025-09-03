@@ -13,7 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 
 const formSchema = z.object({
   username: z.string().min(2, {

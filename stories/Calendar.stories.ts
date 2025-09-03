@@ -7,7 +7,7 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  tags: [''],
+  tags: ['autodocs'],
   args: {},
 } satisfies Meta<typeof Calendar>;
 
