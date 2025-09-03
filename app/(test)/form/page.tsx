@@ -21,7 +21,7 @@ const formSchema = z.object({
   }),
 });
 
-export const ProfileForm = () => {
+const ProfileForm = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,7 +30,7 @@ export const ProfileForm = () => {
   });
 
   return (
-    <>
+    <div>
       <h1>FORM</h1>
       <Form {...form}>
         <form
@@ -66,7 +66,7 @@ export const ProfileForm = () => {
           <Button type="submit">Submit</Button>
         </form>
       </Form>
-    </>
+    </div>
   );
 };
 
