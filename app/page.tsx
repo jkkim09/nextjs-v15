@@ -4,10 +4,13 @@ import Button from '@/components/common/Button';
 import LucideIcon from '@/components/common/Icon';
 import { Skeleton } from '@/components/common/Skeleton';
 import Table, { TableHeader } from '@/components/common/Table';
+import Tooltip from '@/components/common/Tooltip';
 import TestComponent from '@/components/TestComponrnt';
 import TestSelect from '@/components/TestSelect';
+import { usePreventNavigation } from '@/hooks/common/usePreventNavigation';
 import { counterActions } from '@/stores/counterSlice';
 import { AppDispatch, RootState } from '@/stores/store';
+import { useTheme } from 'next-themes';
 import { useDispatch, useSelector } from 'react-redux';
 
 interface User {
@@ -34,8 +37,10 @@ const StatusComponent: React.FC<{ row: User }> = ({ row }) => {
 };
 
 const Page = () => {
+  const { theme, setTheme } = useTheme();
   const count = useSelector((state: RootState) => state.counter.value);
   const dispatch = useDispatch<AppDispatch>();
+  usePreventNavigation();
 
   const users: User[] = [
     { id: 1, name: '김민준', email: 'kim.minjun@example.com', isActive: true },
@@ -126,6 +131,18 @@ const Page = () => {
           +5
         </button>
       </div>
+      <Tooltip content="This is a tooltip">
+        <button>Hover me</button>
+      </Tooltip>
+      <Button
+        className="p-2 rounded-md border"
+        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      >
+        {theme === 'dark' ? '🌞 Light' : '🌙 Dark'}
+      </Button>
+      <div className="bg-primary text-sm">test</div>
+      <div className="bg-primary text-md font-secondary">test</div>
+      <div className="bg-primary text-lg font-primary">test</div>
     </div>
   );
 };
