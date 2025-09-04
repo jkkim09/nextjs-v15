@@ -146,7 +146,10 @@ const Page = () => {
       <div className="w-[300px] h-[200px] bg-secondary p-[20px] ">
         <div>TestSelect</div>
       </div>
-      <h1 className="h1">TEST H1</h1>
+      <h1 className="h1 drop-shadow-test border-1 border-primary rounded-test">
+        TEST H1
+      </h1>
+      <div className="card">Card Theme</div>
     </div>
   );
 };
