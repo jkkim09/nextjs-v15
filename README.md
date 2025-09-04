@@ -1,3 +1,5 @@
+## HTML
+
 ```html
 <!DOCTYPE html> : 이 문서를 HTML5로 선언하는 가장 기본적인 줄입니다.
 
@@ -329,6 +331,8 @@ export default async function ProductPage({ params }: { params: { id: string } }
 }
 
 ```
+
+## GEO
 
 ```
 
