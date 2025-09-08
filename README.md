@@ -1,3 +1,13 @@
+## Docker
+
+```bash
+docker build -t [name]:[version] .
+```
+
+```bash
+docker run -d -p 3000:3000 [image-id]
+```
+
 ## HTML
 
 ```html

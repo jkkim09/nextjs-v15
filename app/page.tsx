@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@/components/common/Button';
+import Editor from '@/components/common/HtmlEditor';
 import LucideIcon from '@/components/common/Icon';
 import { Skeleton } from '@/components/common/Skeleton';
 import Table, { TableHeader } from '@/components/common/Table';
@@ -150,6 +151,7 @@ const Page = () => {
         TEST H1
       </h1>
       <div className="card">Card Theme</div>
+      <Editor />
     </div>
   );
 };
