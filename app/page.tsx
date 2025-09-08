@@ -182,6 +182,7 @@ const Page = () => {
       </Button>
 
       <div
+        className="html-container ql-editor"
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(editValue) }}
       />
     </div>

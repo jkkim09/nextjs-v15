@@ -17,7 +17,8 @@ body {
   box-sizing: border-box;
 }
 
-.ql-container {
+.ql-container,
+.html-container {
   img {
     display: inline-block !important;
   }
