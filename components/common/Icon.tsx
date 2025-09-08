@@ -9,14 +9,16 @@ interface LucideIconProps {
   fill?: string;
   color?: string;
   className?: string;
+  strokeWidth?: string | number;
 }
 
 const LucideIcon = ({
   name,
   size = 24,
-  fill,
+  fill = '#fff',
   color = 'currentColor',
   className,
+  strokeWidth,
 }: LucideIconProps) => {
   const IconComponent = Icons[name] as ForwardRefExoticComponent<
     Omit<Icons.LucideProps, 'ref'> & RefAttributes<SVGSVGElement>
@@ -31,6 +33,7 @@ const LucideIcon = ({
       size={size}
       color={color}
       fill={fill}
+      strokeWidth={strokeWidth}
       className={className}
     />
   );
