@@ -14,6 +14,18 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Single: Story = {
   args: {},
+};
+
+export const Range: Story = {
+  args: {
+    mode: 'range',
+  },
+};
+
+export const Multi: Story = {
+  args: {
+    mode: 'multiple',
+  },
 };

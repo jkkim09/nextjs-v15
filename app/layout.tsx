@@ -7,6 +7,15 @@ import store from '@/stores/store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Providers from './providers';
 
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import 'dayjs/locale/ko'; // 한국어 로케일 가져오기
+dayjs.locale('ko'); //
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault('Asia/Seoul'); // 디폴트
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],

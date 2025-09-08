@@ -16,6 +16,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DOMPurify from 'dompurify';
 import { DropdownMenu } from '@/components/common/DropdownMenu';
+import { DatePicker } from '@/components/common/DatePicker';
+import dayjs from 'dayjs';
 
 interface User {
   id: number;
@@ -187,6 +189,27 @@ const Page = () => {
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(editValue) }}
       />
       <DropdownMenu />
+      <DatePicker
+        onChange={(data) => {
+          console.log('DatePicker', data);
+        }}
+      />
+
+      <DatePicker
+        mode={'range'}
+        onChange={(data) => {
+          console.log('DatePicker', data);
+        }}
+      />
+
+      <DatePicker
+        mode={'multiple'}
+        onChange={(data) => {
+          console.log('DatePicker', data);
+        }}
+      />
+      <div>{new Date().toLocaleTimeString()}</div>
+      <div>{dayjs(new Date()).format('YYYY년 MM월 DD일 A HH:mm:ss')}</div>
     </div>
   );
 };
