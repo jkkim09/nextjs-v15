@@ -15,6 +15,7 @@ import { useTheme } from 'next-themes';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DOMPurify from 'dompurify';
+import { DropdownMenu } from '@/components/common/DropdownMenu';
 
 interface User {
   id: number;
@@ -45,7 +46,7 @@ const Page = () => {
   const dispatch = useDispatch<AppDispatch>();
   usePreventNavigation();
 
-  const [editValue, setEditValue] = useState<string>('');
+  const [editValue, setEditValue] = useState<string>('<p>TEST 222</p>');
 
   const users: User[] = [
     { id: 1, name: '김민준', email: 'kim.minjun@example.com', isActive: true },
@@ -166,7 +167,7 @@ const Page = () => {
       </h1>
       <div className="card">Card Theme</div>
       <Editor
-        defaultValue={'<p>TEST</p>'}
+        defaultValue={editValue}
         onChange={(e) => {
           console.log(e);
           setEditValue(e);
@@ -185,6 +186,7 @@ const Page = () => {
         className="html-container ql-editor"
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(editValue) }}
       />
+      <DropdownMenu />
     </div>
   );
 };
