@@ -12,6 +12,7 @@ import { usePreventNavigation } from '@/hooks/common/usePreventNavigation';
 import { counterActions } from '@/stores/counterSlice';
 import { AppDispatch, RootState } from '@/stores/store';
 import { useTheme } from 'next-themes';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 interface User {
@@ -42,6 +43,8 @@ const Page = () => {
   const count = useSelector((state: RootState) => state.counter.value);
   const dispatch = useDispatch<AppDispatch>();
   usePreventNavigation();
+
+  const [editValue, setEditValue] = useState<string>('');
 
   const users: User[] = [
     { id: 1, name: '김민준', email: 'kim.minjun@example.com', isActive: true },
@@ -151,7 +154,20 @@ const Page = () => {
         TEST H1
       </h1>
       <div className="card">Card Theme</div>
-      <Editor />
+      <Editor
+        defaultValue={'<p>TEST</p>'}
+        onChange={(e) => {
+          console.log(e);
+          setEditValue(e);
+        }}
+      />
+      <Button
+        onClick={() => {
+          console.log(editValue);
+        }}
+      >
+        TEST EDITOR
+      </Button>
     </div>
   );
 };
