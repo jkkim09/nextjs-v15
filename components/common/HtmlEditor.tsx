@@ -61,7 +61,7 @@ const ReactQuillEditor = ({
             // 3. 찾은 이미지 엘리먼트에 data-imageId 속성을 추가합니다.
             if (latestImage) {
               latestImage.setAttribute(
-                'data-imageId',
+                'data-id',
                 `${images.length}-${String(data.id)}`
               );
 

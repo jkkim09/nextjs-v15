@@ -14,6 +14,7 @@ import { AppDispatch, RootState } from '@/stores/store';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import DOMPurify from 'dompurify';
 
 interface User {
   id: number;
@@ -80,6 +81,16 @@ const Page = () => {
     { id: 1, name: '홍길동', age: 25, city: '서울' },
     { id: 2, name: '김철수', age: 30, city: '부산' },
   ];
+
+  const getImageId = (htmlString: string) => {
+    const regex = /data-id="([^"]+)"/g;
+    return Array.from(htmlString.matchAll(regex), (m) => m[1]);
+  };
+
+  const removeImageId = (htmlString: string) => {
+    const regex = / data-id="([^"]+)"/g;
+    return htmlString.replaceAll(regex, '');
+  };
 
   return (
     <div className="flex flex-col p-[100px]">
@@ -163,11 +174,16 @@ const Page = () => {
       />
       <Button
         onClick={() => {
-          console.log(editValue);
+          console.log('getImageId(editValue)', getImageId(editValue));
+          console.log('removeImageId', removeImageId(editValue));
         }}
       >
         TEST EDITOR
       </Button>
+
+      <div
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(editValue) }}
+      />
     </div>
   );
 };
