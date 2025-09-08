@@ -64,7 +64,8 @@ const ReactQuillEditor = ({
           ],
           [{ color: [] }, { background: [] }],
           ['clean'],
-          ['link', 'image', 'video'],
+          ['link', 'image'],
+          [{ align: [] }],
         ],
         handlers: {
           image: handleImageUpload, // 이미지 버튼 클릭시 커스텀 핸들러 실행
