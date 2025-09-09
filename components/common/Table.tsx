@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import React, { useState, useMemo } from 'react';
 
 // 트리 구조 타입
@@ -12,6 +13,7 @@ export interface TreeData<T> {
 export interface TableHeader<T> {
   key: keyof T;
   label: string;
+  width?: number;
   render?: React.FC<{ row: T; index: number; level: number }>;
   headerRender?: React.FC<{ label: string }>;
   colSpan?: number;
@@ -186,8 +188,12 @@ const Table = <T extends TreeData<T>>({
     });
 
   return (
-    <div className="table-container">
-      <table>
+    <div
+      className={cn(
+        'table-container border-1 border-[#000] rounded-[8px] overflow-hidden'
+      )}
+    >
+      <table className="w-full">
         <thead>
           <tr>
             {/* 전체 선택 체크박스 */}
@@ -211,6 +217,9 @@ const Table = <T extends TreeData<T>>({
                 key={String(header.key)}
                 colSpan={header.colSpan}
                 rowSpan={header.rowSpan}
+                style={{
+                  width: header.width,
+                }}
               >
                 {header.headerRender ? (
                   <header.headerRender label={header.label} />

@@ -18,6 +18,9 @@ import DOMPurify from 'dompurify';
 import { DropdownMenu } from '@/components/common/DropdownMenu';
 import { DatePicker } from '@/components/common/DatePicker';
 import dayjs from 'dayjs';
+import DynamicComponent, {
+  ComponentName,
+} from '@/components/dynamicComponent/DynamicComponent';
 
 interface RowData {
   id: number;
@@ -108,6 +111,7 @@ const Page = () => {
     {
       key: 'name',
       label: '이름',
+      width: 500,
       headerRender: ({ label }) => {
         return <div>{label} : test</div>;
       },
@@ -132,6 +136,8 @@ const Page = () => {
     },
     { id: 5, name: '루트 2', value: '500' },
   ];
+
+  const componentNameTest: ComponentName = 'AModule';
 
   return (
     <div className="flex flex-col p-[100px]">
@@ -254,16 +260,11 @@ const Page = () => {
       <div>{new Date().toLocaleTimeString()}</div>
       <div>{dayjs(new Date()).format('YYYY년 MM월 DD일 A HH:mm:ss')}</div>
       <Table useCheckBox useTree headers={headers} data={data} openIds={[1]} />
-
-      <div className="relative max-w-xs p-3 bg-gray-200 text-gray-800 rounded-2xl">
-        안녕하세요 👋
-        <div
-          className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 w-0 h-0 
-              border-t-8 border-t-transparent 
-              border-r-8 border-r-gray-200 
-              border-b-8 border-b-transparent"
-        ></div>
-      </div>
+      <DynamicComponent
+        componentName={componentNameTest}
+        data={{ title: 'test1' }}
+      />
+      <DynamicComponent componentName="BModule" data={{ test: 123 }} />
     </div>
   );
 };

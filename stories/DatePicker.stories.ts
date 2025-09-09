@@ -2,7 +2,7 @@ import { DatePicker } from '@/components/common/DatePicker';
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 const meta = {
-  title: 'Calendar/DatePicker',
+  title: 'DatePicker',
   component: DatePicker,
   parameters: {
     layout: 'centered',
