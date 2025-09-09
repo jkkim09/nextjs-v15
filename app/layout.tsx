@@ -6,6 +6,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import store from '@/stores/store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Providers from './providers';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -37,13 +38,15 @@ const RootLayout = ({
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <html lang="ko" suppressHydrationWarning>
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
-            <Providers>
-              <main>{children}</main>
-            </Providers>
-          </body>
+          <TooltipProvider>
+            <body
+              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+              <Providers>
+                <main>{children}</main>
+              </Providers>
+            </body>
+          </TooltipProvider>
         </html>
       </QueryClientProvider>
     </Provider>

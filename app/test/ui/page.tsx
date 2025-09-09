@@ -194,11 +194,11 @@ const Page = () => {
         </Button>
       </div>
       <Tooltip content="tooltip TEST TEST" position="top">
-        <button>Hover me</button>
+        <button className="max-w-max">Hover me</button>
       </Tooltip>
 
-      <Tooltip content="tooltip" position="bottom">
-        <h1>TEST HEAD</h1>
+      <Tooltip content="tooltip" position="right">
+        <h1 className="max-w-max">TEST HEAD</h1>
       </Tooltip>
 
       <Button
