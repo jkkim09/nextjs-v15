@@ -39,27 +39,39 @@ const ReactQuillEditor = ({
 
     try {
       const editor = quillRef.current?.getEditor();
-      const range = editor?.getSelection()?.index ?? editor?.getLength() ?? 0;
-      editor?.insertEmbed(range, 'image', data.url); // 에디터에 이미지 삽입
-      editor?.setSelection((range ?? 0) + 1);
+      if (!editor) return;
 
-      // 추가된 로직: 삽입된 이미지 엘리먼트에 data-id 속성 추가
+      const range = editor.getSelection()?.index ?? editor.getLength() ?? 0;
+
+      // 이미지를 삽입할 위치에 `insertEmbed`를 호출합니다.
+      editor.insertEmbed(range, 'image', data.url);
+
+      // 삽입된 이미지 블롯을 가져옵니다.
+      // getLeaf()는 Blot 객체와 오프셋을 포함하는 배열을 반환합니다.
+      const [blot] = editor.getLeaf(range);
+
+      // blot 객체에 domNode가 존재하는지 확인합니다.
+      if (blot && blot.domNode) {
+        const insertedNode = blot.domNode as HTMLElement;
+
+        // insertedNode의 tagName을 확인하여 이미지가 맞는지 검증합니다.
+        if (insertedNode.tagName === 'IMG') {
+          const imageElement = insertedNode as HTMLImageElement;
+          imageElement.setAttribute(
+            'data-id',
+            `${Date.now()}-${String(data.id)}`
+          );
+        }
+      }
+
+      // 커서를 삽입된 이미지 뒤로 이동시킵니다.
+      editor.setSelection(range + 1);
+
       const quillEditor = quillRef.current?.editor?.root;
       if (quillEditor) {
-        const images = quillEditor.querySelectorAll('img');
-        const latestImage = images[images.length - 1];
-
-        if (latestImage) {
-          latestImage.setAttribute(
-            'data-id',
-            `${images.length}-${String(data.id)}`
-          );
-
-          // 이미지 업로드 후, 새로운 onChange 콜백을 호출하여 최신 상태를 전달
-          setTimeout(() => {
-            onChangeHandler(quillEditor?.getHTML());
-          }, 100);
-        }
+        setTimeout(() => {
+          onChangeHandler(quillEditor.innerHTML);
+        }, 100);
       }
     } catch (error) {
       console.error('이미지 업로드 실패:', error);
