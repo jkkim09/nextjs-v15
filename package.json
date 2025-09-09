@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "type:base": "openapi-typescript http://3.37.227.162:8080/message/v3/api-doc -o ./types/base.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
@@ -62,6 +63,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.1",
     "eslint-plugin-storybook": "^9.1.4",
+    "openapi-typescript": "^7.9.1",
     "playwright": "^1.55.0",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
