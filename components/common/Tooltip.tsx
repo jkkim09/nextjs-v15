@@ -52,7 +52,7 @@ const Tooltip: React.FC<TooltipProps> = ({
       } else if (position === 'right') {
         styleValue.left = rect.right + 12;
       } else if (position === 'top' || position === 'bottom') {
-        styleValue.left = rect.right / 2 + 10;
+        styleValue.left = rect.left;
       }
 
       setStyle(styleValue);

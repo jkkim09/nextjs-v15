@@ -187,7 +187,7 @@ const Page = () => {
           +5
         </Button>
       </div>
-      <Tooltip content="tooltip" position="top">
+      <Tooltip content="tooltip TEST TEST" position="top">
         <button>Hover me</button>
       </Tooltip>
 
