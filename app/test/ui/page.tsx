@@ -108,6 +108,9 @@ const Page = () => {
     {
       key: 'name',
       label: '이름',
+      headerRender: ({ label }) => {
+        return <div>{label} : test</div>;
+      },
     },
     { key: 'value', label: '값' },
   ];
@@ -184,9 +187,14 @@ const Page = () => {
           +5
         </Button>
       </div>
-      <Tooltip content="This is a tooltip">
+      <Tooltip content="tooltip" position="top">
         <button>Hover me</button>
       </Tooltip>
+
+      <Tooltip content="tooltip" position="bottom">
+        <h1>TEST HEAD</h1>
+      </Tooltip>
+
       <Button
         className="p-2 rounded-md border"
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -245,7 +253,17 @@ const Page = () => {
       />
       <div>{new Date().toLocaleTimeString()}</div>
       <div>{dayjs(new Date()).format('YYYY년 MM월 DD일 A HH:mm:ss')}</div>
-      <Table useCheckBox headers={headers} data={data} openIds={[1]} />
+      <Table useCheckBox useTree headers={headers} data={data} openIds={[1]} />
+
+      <div className="relative max-w-xs p-3 bg-gray-200 text-gray-800 rounded-2xl">
+        안녕하세요 👋
+        <div
+          className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 w-0 h-0 
+              border-t-8 border-t-transparent 
+              border-r-8 border-r-gray-200 
+              border-b-8 border-b-transparent"
+        ></div>
+      </div>
     </div>
   );
 };

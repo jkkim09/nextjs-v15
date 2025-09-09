@@ -13,6 +13,7 @@ export interface TableHeader<T> {
   key: keyof T;
   label: string;
   render?: React.FC<{ row: T; index: number; level: number }>;
+  headerRender?: React.FC<{ label: string }>;
   colSpan?: number;
   rowSpan?: number;
 }
@@ -24,6 +25,7 @@ export interface TableProps<T extends TreeData<T>> {
   indent?: number;
   openIds?: (number | string)[];
   checked?: (number | string)[];
+  useTree?: boolean;
   useCheckBox?: boolean;
 }
 
@@ -47,6 +49,7 @@ const Table = <T extends TreeData<T>>({
   indent = 16,
   openIds,
   checked,
+  useTree,
   useCheckBox,
 }: TableProps<T>) => {
   const [openKeys, setOpenKeys] = useState<Set<string | number>>(
@@ -134,28 +137,33 @@ const Table = <T extends TreeData<T>>({
         <React.Fragment key={`${level}-${item.id}`}>
           <tr>
             {/* 체크박스 열 */}
-            <td style={{ paddingLeft: `${level * indent}px` }}>
-              {useCheckBox && (
+            {useCheckBox && (
+              <td>
                 <input
                   type="checkbox"
                   checked={isChecked}
                   onChange={() => toggleCheck(item)}
                 />
-              )}
-              {hasChildren && (
-                <button
-                  onClick={() => toggleRow(item.id)}
-                  style={{
-                    marginLeft: '4px',
-                    cursor: 'pointer',
-                    background: 'none',
-                    border: 'none',
-                  }}
-                >
-                  {isOpen ? '▼' : '▶'}
-                </button>
-              )}
-            </td>
+              </td>
+            )}
+
+            {useTree && (
+              <td style={{ paddingLeft: `${level * indent}px` }}>
+                {hasChildren && (
+                  <button
+                    onClick={() => toggleRow(item.id)}
+                    style={{
+                      marginLeft: '4px',
+                      cursor: 'pointer',
+                      background: 'none',
+                      border: 'none',
+                    }}
+                  >
+                    {isOpen ? '▼' : '▶'}
+                  </button>
+                )}
+              </td>
+            )}
 
             {/* 데이터 열 */}
             {headers.map((header) => {
@@ -197,13 +205,18 @@ const Table = <T extends TreeData<T>>({
                 />
               </th>
             )}
+            {useTree && <th>Expand</th>}
             {headers.map((header) => (
               <th
                 key={String(header.key)}
                 colSpan={header.colSpan}
                 rowSpan={header.rowSpan}
               >
-                {header.label}
+                {header.headerRender ? (
+                  <header.headerRender label={header.label} />
+                ) : (
+                  header.label
+                )}
               </th>
             ))}
           </tr>
