@@ -47,8 +47,6 @@ const Tooltip: React.FC<TooltipProps> = ({
         transform: position === 'top' ? 'translateY(-100%)' : 'none', // 위일 때는 위로 밀기
       };
 
-      console.log('rect', rect);
-
       if (position === 'left') {
         styleValue.left = 12;
       } else if (position === 'right') {
