@@ -65,14 +65,12 @@ const ReactQuillEditor = ({
       }
 
       // 커서를 삽입된 이미지 뒤로 이동시킵니다.
-      editor.setSelection(range + 1);
-
-      const quillEditor = quillRef.current?.editor?.root;
-      if (quillEditor) {
-        setTimeout(() => {
+      setTimeout(() => {
+        const quillEditor = quillRef.current?.editor?.root;
+        if (quillEditor) {
           onChangeHandler(quillEditor.innerHTML);
-        }, 100);
-      }
+        }
+      }, 100);
     } catch (error) {
       console.error('이미지 업로드 실패:', error);
     }
