@@ -221,7 +221,6 @@ const Page = () => {
       <Editor
         defaultValue={editValue}
         onChange={(e) => {
-          console.log(e);
           setEditValue(e);
         }}
       />
