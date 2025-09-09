@@ -21,6 +21,7 @@ import dayjs from 'dayjs';
 import DynamicComponent, {
   ComponentName,
 } from '@/components/dynamicComponent/DynamicComponent';
+import { toast } from 'sonner';
 
 interface RowData {
   id: number;
@@ -265,6 +266,25 @@ const Page = () => {
         data={{ title: 'test1' }}
       />
       <DynamicComponent componentName="BModule" data={{ test: 123 }} />
+      <Button
+        onClick={() =>
+          toast(
+            <div
+              onClick={() => {
+                console.log('toast');
+              }}
+            >
+              TEST
+            </div>,
+            {
+              position: 'top-right',
+              duration: 10000,
+            }
+          )
+        }
+      >
+        Show Toast
+      </Button>
     </div>
   );
 };

@@ -1,0 +1,30 @@
+.ql-header {
+  .ql-picker-item:before,
+  .ql-picker-label::before {
+    content: '기본' !important;
+  }
+
+  .ql-picker-item[data-value='1']:before,
+  .ql-picker-label[data-value='1']:before {
+    content: '헤더1' !important;
+  }
+
+  .ql-picker-item[data-value='2']:before,
+  .ql-picker-label[data-value='2']:before {
+    content: '헤더2' !important;
+  }
+  ㄴ .ql-picker-item[data-value='3']:before,
+  .ql-picker-label[data-value='3']:before {
+    content: '헤더3' !important;
+  }
+
+  .ql-picker-item[data-value='4']:before,
+  .ql-picker-label[data-value='4']:before {
+    content: '헤더4' !important;
+  }
+
+  .ql-picker-item[data-value='5']:before,
+  .ql-picker-label[data-value='5']:before {
+    content: '헤더5' !important;
+  }
+}

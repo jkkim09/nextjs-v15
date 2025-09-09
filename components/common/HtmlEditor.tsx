@@ -84,6 +84,7 @@ const ReactQuillEditor = ({
       toolbar: {
         container: [
           [{ header: [1, 2, 3, 4, 5, false] }],
+          // ['blockquote', 'code-block'],
           ['bold', 'italic', 'underline', 'strike' /* , 'blockquote' */],
           [
             { list: 'ordered' },
@@ -91,6 +92,7 @@ const ReactQuillEditor = ({
             { indent: '-1' },
             { indent: '+1' },
           ],
+
           [{ color: [] }, { background: [] }],
           ['clean'],
           ['link', 'image'],

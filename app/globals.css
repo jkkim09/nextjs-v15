@@ -2,6 +2,8 @@
 
 /* theme 다크모드 포함 */
 @import '../style/theme.css';
+/* quill 에디터 */
+@import '../style/quiill.scss';
 
 /* 1rem = 10px */
 /* html {

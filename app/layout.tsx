@@ -7,6 +7,7 @@ import store from '@/stores/store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Providers from './providers';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import { Toaster } from '@/components/ui/sonner';
 
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -44,6 +45,7 @@ const RootLayout = ({
             >
               <Providers>
                 <main>{children}</main>
+                <Toaster />
               </Providers>
             </body>
           </TooltipProvider>

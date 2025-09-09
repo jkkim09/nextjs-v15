@@ -25,7 +25,7 @@ const headers: TableHeader<any>[] = [
   {
     key: 'name',
     label: '이름',
-    width: 100,
+    width: 200,
   },
   { key: 'value', label: '값' },
 ];
@@ -41,7 +41,20 @@ const data: RowData[] = [
         id: 3,
         name: '자식 1-2',
         value: '300',
-        children: [{ id: 4, name: '손자 1-2-1', value: '400' }],
+        children: [
+          {
+            id: 4,
+            name: '손자 1-2-1',
+            value: '400',
+            children: [
+              {
+                id: 5,
+                name: '손자 1-2-1-1',
+                value: '800',
+              },
+            ],
+          },
+        ],
       },
     ],
   },
