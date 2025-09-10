@@ -175,3 +175,16 @@
     box-shadow: var(--shadow-xl);
   }
 }
+
+@utility box1 {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+
+  &:hover {
+    background-color: blue;
+  }
+}
+
+/* 커스텀 미디어 커리 */
+@custom-variant xs (@media (max-width: 720px));

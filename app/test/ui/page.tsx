@@ -284,6 +284,17 @@ const Page = () => {
       >
         Show Toast
       </Button>
+
+      <div className="group">
+        <p className="group-hover:text-blue-500">
+          This text changes color on hover.
+        </p>
+        <button className="opacity-0 group-hover:opacity-100">
+          This button appears on hover.
+        </button>
+      </div>
+      <div className="box1"></div>
+      <div className="size-10 bg-primary xs:size-40"></div>
     </div>
   );
 };
