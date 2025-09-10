@@ -29,6 +29,7 @@ export interface TableProps<T extends TreeData<T>> {
   checked?: (number | string)[];
   useTree?: boolean;
   useCheckBox?: boolean;
+  useDragAndDrop?: boolean;
 }
 
 // 모든 노드의 ID를 가져오는 헬퍼 함수

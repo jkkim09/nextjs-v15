@@ -87,6 +87,7 @@
 
 /* root 변수 */
 :root {
+  /* --font-display: 'Satoshi', 'sans-serif'; */
   --primary-base: #bbeee6;
   --radius: 0.625rem;
   --background: oklch(1 0 0);

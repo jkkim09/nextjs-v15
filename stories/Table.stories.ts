@@ -83,3 +83,21 @@ export const CheckBox: Story = {
     data,
   },
 };
+
+export const DragAndDrop: Story = {
+  args: {
+    headers,
+    data,
+    useDragAndDrop: true,
+  },
+};
+
+export const TreeOrCheckedOrDragAndDrop: Story = {
+  args: {
+    headers,
+    data,
+    useTree: true,
+    useCheckBox: true,
+    useDragAndDrop: true,
+  },
+};

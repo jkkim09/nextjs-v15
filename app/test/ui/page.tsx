@@ -295,6 +295,14 @@ const Page = () => {
       </div>
       <div className="box1"></div>
       <div className="size-10 bg-primary xs:size-40"></div>
+      <div className="w-[300px] line-clamp-1">
+        test test test test test test test test test test test test test test
+        test test test test test test test test
+      </div>
+      <div className="w-[300px] line-clamp-2">
+        test test test test test test test test test test test test test test
+        test test test test test test test test
+      </div>
     </div>
   );
 };
