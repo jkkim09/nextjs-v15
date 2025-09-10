@@ -58,7 +58,7 @@ const data: RowData[] = [
       },
     ],
   },
-  { id: 5, name: '루트 2', value: '500' },
+  { id: 6, name: '루트 2', value: '500' },
 ];
 
 export const Primary: Story = {

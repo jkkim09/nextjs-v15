@@ -22,6 +22,8 @@ import DynamicComponent, {
   ComponentName,
 } from '@/components/dynamicComponent/DynamicComponent';
 import { toast } from 'sonner';
+import TestAccordion from '@/components/TestAccordion';
+import Checkbox from '@/components/common/Checkbox';
 
 interface RowData {
   id: number;
@@ -303,6 +305,12 @@ const Page = () => {
         test test test test test test test test test test test test test test
         test test test test test test test test
       </div>
+
+      <TestAccordion />
+
+      <Checkbox />
+
+      {/*  */}
     </div>
   );
 };
