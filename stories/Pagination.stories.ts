@@ -15,5 +15,23 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-  args: {},
+  args: {
+    limit: 10,
+    total: 17,
+  },
+};
+
+export const Limit: Story = {
+  args: {
+    limit: 3,
+    total: 17,
+  },
+};
+
+export const ActiveIndex: Story = {
+  args: {
+    limit: 10,
+    total: 17,
+    activeIndex: 12,
+  },
 };
