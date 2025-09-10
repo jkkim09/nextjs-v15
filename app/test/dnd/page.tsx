@@ -1,11 +1,7 @@
 'use client';
 
-import {
-  SortableContext,
-  useSortable,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+import { SortableList } from '@/components/testSortTree/SortableList';
+import { useDraggable } from '@dnd-kit/core';
 
 import {
   SimpleTreeItemWrapper,
@@ -44,47 +40,36 @@ const TreeItem = React.forwardRef<
   );
 });
 
-const SortableItem = ({
-  id,
-  children,
-}: {
-  id: string | number;
-  children: React.ReactNode;
-}) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id });
-  const style = { transform: CSS.Transform.toString(transform), transition };
-
-  return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-      className="p-2 border mb-1 bg-white"
-    >
-      {children}
-    </div>
-  );
-};
-
 const DnDPage = () => {
-  const items = ['A', 'B', 'C'];
-  const [sortItems, setItems] = useState(initialViableMinimalData);
+  const { attributes, listeners, setNodeRef } = useDraggable({
+    id: 'unique-id',
+  });
+
+  const [sortItems, setSortItems] = useState(initialViableMinimalData);
+
+  const [items, setItems] = useState([{ id: 1 }, { id: 2 }, { id: 3 }]);
+
   return (
     <div>
-      <SortableContext items={items} strategy={verticalListSortingStrategy}>
-        {items.map((id) => (
-          <SortableItem key={id} id={id}>
-            {id}
-          </SortableItem>
-        ))}
-      </SortableContext>
+      <section>
+        <div style={{ maxWidth: 400, margin: '30px auto' }}>
+          <SortableList
+            items={items}
+            onChange={setItems}
+            renderItem={(item) => (
+              <SortableList.Item id={item.id}>
+                <SortableList.DragHandle />
+                {item.id}:TEST2
+              </SortableList.Item>
+            )}
+          />
+        </div>
+      </section>
 
       <section>
         <SortableTree
           items={sortItems}
-          onItemsChanged={setItems}
+          onItemsChanged={setSortItems}
           TreeItemComponent={TreeItem}
         />
       </section>
