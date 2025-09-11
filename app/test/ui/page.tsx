@@ -24,6 +24,8 @@ import DynamicComponent, {
 import { toast } from 'sonner';
 import TestAccordion from '@/components/TestAccordion';
 import Checkbox from '@/components/common/Checkbox';
+import RadioGroup from '@/components/common/RadioGroup';
+import Drawer from '@/components/common/Drawer';
 
 interface RowData {
   id: number;
@@ -310,6 +312,50 @@ const Page = () => {
 
       <Checkbox />
 
+      {/*  */}
+      <RadioGroup
+        // align={'column'}
+        items={[
+          {
+            label: (
+              <>
+                <span>TEST1 SPAN</span>
+              </>
+            ),
+            value: 1,
+          },
+          {
+            label: 'test2',
+            value: 2,
+          },
+          {
+            label: 'test3',
+            value: 3,
+          },
+          {
+            label: 'test4',
+            value: 4,
+          },
+        ]}
+        onChange={(e) => {
+          console.log(e);
+        }}
+      />
+      {/*  */}
+      <div className="grid grid-cols-2 gap-4">
+        <Drawer position="top">
+          <p>This is a top drawer content.</p>
+        </Drawer>
+        <Drawer position="right">
+          <p className="w-[500px]">This is a right drawer content.</p>
+        </Drawer>
+        <Drawer position="bottom">
+          <p>This is a bottom drawer content.</p>
+        </Drawer>
+        <Drawer position="left">
+          <p>This is a left drawer content.</p>
+        </Drawer>
+      </div>
       {/*  */}
     </div>
   );
