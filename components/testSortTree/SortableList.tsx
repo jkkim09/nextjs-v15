@@ -50,7 +50,9 @@ export function SortableList<T extends BaseItem>({
       <SortableContext items={items}>
         <ul className="SortableList" role="application">
           {items.map((item) => (
-            <React.Fragment key={item.id}>{renderItem(item)}</React.Fragment>
+            <React.Fragment key={item.id}>
+              <>{renderItem(item)}</>
+            </React.Fragment>
           ))}
         </ul>
       </SortableContext>

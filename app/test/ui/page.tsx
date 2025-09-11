@@ -29,6 +29,8 @@ import Drawer from '@/components/common/Drawer';
 import useTopButton from '@/hooks/common/useTopButton';
 import useViewPositionScroll from '@/hooks/common/useViewPositionScroll';
 import useScrollDirection from '@/hooks/common/useScrollDirection';
+import Hr from '@/components/common/Hr';
+import TestDnd from '@/components/common/TestComponent';
 
 interface RowData {
   id: number;
@@ -378,10 +380,11 @@ const Page = () => {
           </span>
         </div>
       )}
-
+      <Hr className="my-10" />
       {/*  */}
       <Button onClick={onClickViewScroll}>View Scroll</Button>
       {/*  */}
+      <TestDnd />
     </div>
   );
 };

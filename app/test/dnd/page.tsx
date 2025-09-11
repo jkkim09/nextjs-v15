@@ -33,9 +33,17 @@ const TreeItem = React.forwardRef<
   HTMLDivElement,
   TreeItemComponentProps<MinimalTreeItemData>
 >((props, ref) => {
+  const { handleProps, ...arg } = props;
   return (
-    <SimpleTreeItemWrapper {...props} ref={ref}>
-      <div>{props.item.value}:TEST</div>
+    <SimpleTreeItemWrapper
+      ref={ref}
+      showDragHandle={false}
+      {...arg}
+      className="test"
+    >
+      <div>
+        <span {...handleProps}>||||</span> {props.item.value}:TEST
+      </div>
     </SimpleTreeItemWrapper>
   );
 });
@@ -60,6 +68,10 @@ const DnDPage = () => {
               <SortableList.Item id={item.id}>
                 <SortableList.DragHandle />
                 {item.id}:TEST2
+                <ul>
+                  <li>TEST1</li>
+                  <li>Test2</li>
+                </ul>
               </SortableList.Item>
             )}
           />
