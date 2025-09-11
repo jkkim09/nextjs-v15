@@ -60,6 +60,7 @@ const StatusComponent: React.FC<{ row: User }> = ({ row }) => {
 const Page = () => {
   const { theme, setTheme } = useTheme();
   const count = useSelector((state: RootState) => state.counter.value);
+  const [radioIndex, setRadioIndex] = useState<number>();
   const dispatch = useDispatch<AppDispatch>();
   usePreventNavigation();
 
@@ -315,44 +316,45 @@ const Page = () => {
       {/*  */}
       <RadioGroup
         // align={'column'}
+        selectedValue={radioIndex}
         items={[
           {
             label: (
               <>
-                <span>TEST1 SPAN</span>
+                <span>TOP</span>
               </>
             ),
             value: 1,
           },
           {
-            label: 'test2',
+            label: 'RIGHT',
             value: 2,
           },
           {
-            label: 'test3',
+            label: 'BOTTOM',
             value: 3,
           },
           {
-            label: 'test4',
+            label: 'LEFT',
             value: 4,
           },
         ]}
         onChange={(e) => {
-          console.log(e);
+          setRadioIndex(e);
         }}
       />
       {/*  */}
       <div className="grid grid-cols-2 gap-4">
-        <Drawer position="top">
+        <Drawer position="top" isOpen={radioIndex === 1}>
           <p>This is a top drawer content.</p>
         </Drawer>
-        <Drawer position="right">
+        <Drawer position="right" isOpen={radioIndex === 2}>
           <p className="w-[500px]">This is a right drawer content.</p>
         </Drawer>
-        <Drawer position="bottom">
+        <Drawer position="bottom" isOpen={radioIndex === 3}>
           <p>This is a bottom drawer content.</p>
         </Drawer>
-        <Drawer position="left">
+        <Drawer position="left" isOpen={radioIndex === 4}>
           <p>This is a left drawer content.</p>
         </Drawer>
       </div>
