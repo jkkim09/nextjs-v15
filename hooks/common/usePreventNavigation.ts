@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
+/** 화면 빠져나가는 이벤트 감지 */
 export function usePreventNavigation() {
   const router = useRouter();
   const pathname = usePathname();

@@ -4,6 +4,9 @@ interface UseOutsideClickHandlerOptions {
   onClose: () => void;
 }
 
+/**
+ * 외부 영역 클릭 감지
+ */
 const useOutsideClickHandler = ({ onClose }: UseOutsideClickHandlerOptions) => {
   const ref = useRef<HTMLDivElement>(null);
 

@@ -26,6 +26,9 @@ import TestAccordion from '@/components/TestAccordion';
 import Checkbox from '@/components/common/Checkbox';
 import RadioGroup from '@/components/common/RadioGroup';
 import Drawer from '@/components/common/Drawer';
+import useTopButton from '@/hooks/common/useTopButton';
+import useViewPositionScroll from '@/hooks/common/useViewPositionScroll';
+import useScrollDirection from '@/hooks/common/useScrollDirection';
 
 interface RowData {
   id: number;
@@ -61,6 +64,9 @@ const Page = () => {
   const { theme, setTheme } = useTheme();
   const count = useSelector((state: RootState) => state.counter.value);
   const [radioIndex, setRadioIndex] = useState<number>();
+  const { showTopButton, handleTop } = useTopButton();
+  const { viewRef, onClickViewScroll } = useViewPositionScroll();
+  const { direction, scrollTop } = useScrollDirection();
   const dispatch = useDispatch<AppDispatch>();
   usePreventNavigation();
 
@@ -155,7 +161,7 @@ const Page = () => {
       >
         TEST2
       </h1>
-      <div className="rounded-5xl border-primary max-h-[100px]"></div>
+      <div className="rounded-5xl border-primary max-h-[100px]">VIEW </div>
       <TestComponent />
       <TestSelect />
       <div className="w-[100px] h-[100px] bg-primary animate-bounce"></div>
@@ -204,7 +210,9 @@ const Page = () => {
       </Tooltip>
 
       <Tooltip content="tooltip" position="right">
-        <h1 className="max-w-max">TEST HEAD</h1>
+        <h1 ref={viewRef} className="max-w-max">
+          TEST HEAD
+        </h1>
       </Tooltip>
 
       <Button
@@ -358,6 +366,21 @@ const Page = () => {
           <p>This is a left drawer content.</p>
         </Drawer>
       </div>
+      {/*  */}
+      {showTopButton && (
+        <div
+          className="cursor-pointer w-[50px] h-[50px] bg-primary rounded-full fixed bottom-[10px] right-[10px] flex justify-center items-center"
+          onClick={handleTop}
+        >
+          TOP
+          <span className="text-[10px]">
+            {direction}:{scrollTop}
+          </span>
+        </div>
+      )}
+
+      {/*  */}
+      <Button onClick={onClickViewScroll}>View Scroll</Button>
       {/*  */}
     </div>
   );
