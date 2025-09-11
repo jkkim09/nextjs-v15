@@ -22,8 +22,10 @@ export interface TableHeader<T> {
 
 // 제네릭 테이블 Props
 export interface TableProps<T extends TreeData<T>> {
+  id?: string;
   headers: TableHeader<T>[];
   data: T[];
+  caption?: string;
   indent?: number;
   openIds?: (number | string)[];
   checked?: (number | string)[];
@@ -47,8 +49,10 @@ const getFlattenedIds = <T extends TreeData<T>>(
 };
 
 const Table = <T extends TreeData<T>>({
+  id = 'table',
   headers,
   data,
+  caption = '테이블',
   indent = 16,
   openIds,
   checked,
@@ -62,22 +66,18 @@ const Table = <T extends TreeData<T>>({
     new Set(checked)
   );
 
-  // 모든 노드 ID를 useMemo로 최적화
   const allIds = useMemo(() => getFlattenedIds(data), [data]);
 
-  // 모든 노드가 체크되었는지 확인
   const isAllChecked = useMemo(
     () => allIds.length > 0 && allIds.every((id) => checkedKeys.has(id)),
     [allIds, checkedKeys]
   );
 
-  // 일부만 체크되었는지 확인 (전체 체크 상태가 아닐 때)
   const isIndeterminate = useMemo(
     () => !isAllChecked && allIds.some((id) => checkedKeys.has(id)),
     [isAllChecked, allIds, checkedKeys]
   );
 
-  // 펼치기/접기 토글
   const toggleRow = (id: string | number) => {
     setOpenKeys((prev) => {
       const newSet = new Set(prev);
@@ -86,7 +86,6 @@ const Table = <T extends TreeData<T>>({
     });
   };
 
-  // 노드와 모든 하위 노드의 체크 상태를 재귀적으로 설정
   const setChildrenChecked = (
     rows: T[],
     checked: boolean,
@@ -106,7 +105,6 @@ const Table = <T extends TreeData<T>>({
     return newSet;
   };
 
-  // 체크 토글
   const toggleCheck = (item: T) => {
     setCheckedKeys((prev) => {
       const isCurrentlyChecked = prev.has(item.id);
@@ -124,12 +122,10 @@ const Table = <T extends TreeData<T>>({
     });
   };
 
-  // 전체 체크 토글
   const toggleCheckAll = () => {
     setCheckedKeys(isAllChecked ? new Set() : new Set(allIds));
   };
 
-  // 행 렌더링
   const renderRows = (rows: T[], level: number): React.ReactNode =>
     rows.map((item, rowIndex) => {
       const isOpen = openKeys.has(item.id);
@@ -138,12 +134,14 @@ const Table = <T extends TreeData<T>>({
 
       return (
         <React.Fragment key={`${level}-${item.id}`}>
-          <tr>
-            {/* 체크박스 열 */}
+          <tr aria-selected={isChecked}>
             {useCheckBox && (
               <td>
+                <label htmlFor={`checkbox-${item.id}`} className="hidden" />
                 <input
                   type="checkbox"
+                  id={`checkbox-${item.id}`}
+                  aria-labelledby={`row-label-${item.id}`}
                   checked={isChecked}
                   onChange={() => toggleCheck(item)}
                 />
@@ -154,6 +152,8 @@ const Table = <T extends TreeData<T>>({
               <td style={{ paddingLeft: `${level * indent}px` }}>
                 {hasChildren && (
                   <button
+                    aria-expanded={isOpen}
+                    aria-controls={`row-children-${item.id}`}
                     onClick={() => toggleRow(item.id)}
                     style={{
                       marginLeft: '4px',
@@ -162,17 +162,19 @@ const Table = <T extends TreeData<T>>({
                       border: 'none',
                     }}
                   >
-                    {isOpen ? '▼' : '▶'}
+                    <span aria-hidden="true">{isOpen ? '▼' : '▶'}</span>
+                    <span className="sr-only">
+                      {isOpen ? 'Collapse' : 'Expand'} {item.id}
+                    </span>
                   </button>
                 )}
               </td>
             )}
 
-            {/* 데이터 열 */}
             {headers.map((header) => {
               const value = item[header.key];
               return (
-                <td key={String(header.key)}>
+                <td key={String(header.key)} id={`row-label-${item.id}`}>
                   {header.render ? (
                     <header.render row={item} index={rowIndex} level={level} />
                   ) : (
@@ -182,8 +184,11 @@ const Table = <T extends TreeData<T>>({
               );
             })}
           </tr>
-          {/* children 렌더링 */}
-          {hasChildren && isOpen && renderRows(item.children!, level + 1)}
+          {hasChildren && isOpen && (
+            <React.Fragment key={`child-${item.id}`}>
+              {renderRows(item.children!, level + 1)}
+            </React.Fragment>
+          )}
         </React.Fragment>
       );
     });
@@ -195,13 +200,16 @@ const Table = <T extends TreeData<T>>({
       )}
     >
       <table className="w-full">
+        <caption className="hidden">{caption}</caption>
         <thead>
           <tr>
-            {/* 전체 선택 체크박스 */}
             {useCheckBox && (
-              <th>
+              <th scope="col">
+                <label htmlFor={id} className="hidden" />
                 <input
                   type="checkbox"
+                  id={id}
+                  aria-label="전체 선택"
                   checked={isAllChecked}
                   onChange={toggleCheckAll}
                   ref={(el) => {
@@ -212,10 +220,11 @@ const Table = <T extends TreeData<T>>({
                 />
               </th>
             )}
-            {useTree && <th>Expand</th>}
+            {useTree && <th scope="col">Expand</th>}
             {headers.map((header) => (
               <th
                 key={String(header.key)}
+                scope="col"
                 colSpan={header.colSpan}
                 rowSpan={header.rowSpan}
                 style={{

@@ -43,7 +43,10 @@ const Button = ({
   const Comp = asChild ? Slot : 'button';
   return (
     <Comp
-      className={cn(buttonVariants({ variant, size, className, outline }))}
+      className={cn(
+        'disabled:cursor-not-allowed disabled:bg-secondary',
+        buttonVariants({ variant, size, className, outline })
+      )}
       {...props}
     />
   );
