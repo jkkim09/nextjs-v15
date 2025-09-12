@@ -171,6 +171,7 @@ const UiPage = () => {
       <h1 className="text-large">TEST</h1>
       {/* 다국어 */}
       <h1>{messages.hello}</h1>
+      <h2>{messages.test.test2}</h2>
       <button onClick={toggleLanguage}>
         {locale === 'ko' ? '영어로 보기' : '한국어로 보기'}
       </button>

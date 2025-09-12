@@ -1,4 +1,7 @@
 {
   "hello": "Hello",
-  "theme": "Theme"
+  "theme": "Theme",
+  "test": {
+    "test2": "test3"
+  }
 }
