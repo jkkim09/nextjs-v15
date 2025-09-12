@@ -24,6 +24,10 @@ const nextConfig: NextConfig = {
     ],
   },
   output: 'standalone',
+  // i18n: {
+  //   locales: ['ko', 'en', 'ja'], // 지원 언어
+  //   defaultLocale: 'ko', // 기본 언어
+  // },
   // 터미널 api 통신 로그
   logging: {
     fetches: {

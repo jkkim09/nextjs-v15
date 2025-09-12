@@ -8,6 +8,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import store from '@/stores/store';
 import { Toaster } from '@/components/ui/sonner';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
@@ -21,8 +22,10 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <TooltipProvider>{children}</TooltipProvider>
-          <Toaster />
+          <LanguageProvider>
+            <TooltipProvider>{children}</TooltipProvider>
+            <Toaster />
+          </LanguageProvider>
           {process.env.NODE_ENV !== 'production' && (
             <ReactQueryDevtools initialIsOpen={false} />
           )}

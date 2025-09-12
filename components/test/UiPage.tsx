@@ -32,6 +32,7 @@ import useScrollDirection from '@/hooks/common/useScrollDirection';
 import Hr from '@/components/common/Hr';
 import { useRouter } from 'next/navigation';
 import { sendGAEvent } from '@next/third-parties/google';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface RowData {
   id: number;
@@ -66,6 +67,7 @@ const StatusComponent: React.FC<{ row: User }> = ({ row }) => {
 const UiPage = () => {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
+  const { messages, toggleLanguage, locale } = useLanguage();
   const count = useSelector((state: RootState) => state.counter.value);
   const [radioIndex, setRadioIndex] = useState<number>();
   const { showTopButton, handleTop } = useTopButton();
@@ -407,6 +409,11 @@ const UiPage = () => {
       <Button onClick={ga4HandleClick}>GA4</Button>
       {/* Datadog RUM  */}
       <button data-dd-action-name="cta_button_clicked">Click Me</button>
+      {/* 다국어 */}
+      <h1>{messages.hello}</h1>
+      <button onClick={toggleLanguage}>
+        {locale === 'ko' ? '영어로 보기' : '한국어로 보기'}
+      </button>
     </div>
   );
 };
