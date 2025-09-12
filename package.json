@@ -37,6 +37,7 @@
     "cookies-next": "^6.1.0",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.18",
+    "dd-trace": "^5.67.0",
     "dnd-kit-sortable-tree": "^0.1.73",
     "dompurify": "^3.2.6",
     "lucide-react": "^0.542.0",

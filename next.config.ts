@@ -1,4 +1,12 @@
 import type { NextConfig } from 'next';
+import tracer from 'dd-trace';
+
+// dd-trace 초기화
+tracer.init({
+  service: 'nextjs-with-datadog',
+  logInjection: true,
+  env: process.env.NODE_ENV || 'production',
+});
 
 const nextConfig: NextConfig = {
   cleanDistDir: true,
@@ -21,6 +29,9 @@ const nextConfig: NextConfig = {
     fetches: {
       fullUrl: true,
     },
+  },
+  experimental: {
+    serverComponentsExternalPackages: ['dd-trace'],
   },
 };
 
