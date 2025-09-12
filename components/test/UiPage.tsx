@@ -229,7 +229,7 @@ const UiPage = () => {
       </Tooltip>
 
       <Button
-        className="p-2 rounded-md border"
+        className=""
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       >
         {theme === 'dark' ? '🌞 Light' : '🌙 Dark'}
