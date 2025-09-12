@@ -4,9 +4,6 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const isLoggedIn = request.cookies.has('token'); // 또는 다른 로그인 상태 확인 로직
-  console.log('request.nextUrl.pathname: ', request.nextUrl.pathname);
-  console.log('token', isLoggedIn);
-
   // 만약 로그인하지 않았는데 대시보드 페이지에 접근하려 한다면
   // if (!isLoggedIn && request.nextUrl.pathname.startsWith('/')) {
   //   // 로그인 페이지로 리디렉션

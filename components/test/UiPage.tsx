@@ -169,6 +169,11 @@ const UiPage = () => {
   return (
     <div className="flex flex-col p-[100px]">
       <h1 className="text-large">TEST</h1>
+      {/* 다국어 */}
+      <h1>{messages.hello}</h1>
+      <button onClick={toggleLanguage}>
+        {locale === 'ko' ? '영어로 보기' : '한국어로 보기'}
+      </button>
       <h1
         style={{
           fontSize: '48px',
@@ -408,12 +413,7 @@ const UiPage = () => {
       {/*  */}
       <Button onClick={ga4HandleClick}>GA4</Button>
       {/* Datadog RUM  */}
-      <button data-dd-action-name="cta_button_clicked">Click Me</button>
-      {/* 다국어 */}
-      <h1>{messages.hello}</h1>
-      <button onClick={toggleLanguage}>
-        {locale === 'ko' ? '영어로 보기' : '한국어로 보기'}
-      </button>
+      <button data-dd-action-name="cta_button_clicked">Click Me2</button>
     </div>
   );
 };
