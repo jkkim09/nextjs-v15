@@ -1,23 +1,13 @@
-'use client';
-
 import './globals.css';
 import { Geist, Geist_Mono } from 'next/font/google';
-// import { GoogleAnalytics } from '@next/third-parties/google';
 import Providers from './providers';
-
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import 'dayjs/locale/ko';
-// import DatadogRum from '@/components/DatadogRum';
 
-import { Provider } from 'react-redux';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { Toaster } from '@/components/ui/sonner';
-import store from '@/stores/store';
-import { useState } from 'react';
+import { GoogleAnalytics } from '@next/third-parties/google';
+import DatadogRum from '@/components/DatadogRum';
 
 dayjs.locale('ko');
 dayjs.extend(utc);
@@ -39,28 +29,21 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <html lang="ko" suppressHydrationWarning>
-          <TooltipProvider>
-            <body
-              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            >
-              {/* Google Analytics */}
-              {/* <GoogleAnalytics gaId="G-9VS4JMKB47" /> */}
-              {/* DatadogRum  */}
-              {/* <DatadogRum /> */}
-              <Providers>
-                <main>{children}</main>
-                <Toaster />
-              </Providers>
-            </body>
-          </TooltipProvider>
-        </html>
-      </QueryClientProvider>
-    </Provider>
+    <html lang="ko" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {/* Google Analytics */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
+        {/* <GoogleAnalytics gaId="G-9VS4JMKB47" /> */}
+        {process.env.NEXT_PUBLIC_DD_APP_ID && <DatadogRum />}
+        <Providers>
+          <main>{children}</main>
+        </Providers>
+      </body>
+    </html>
   );
 }
