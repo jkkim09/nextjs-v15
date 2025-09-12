@@ -21,12 +21,17 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+export const revalidate = 60;
+export async function generateStaticParams() {
+  return [];
+}
+
 export default async function ArticlePage() {
-//   {
-//       params,
-//   }: {
-//     params: { slug: string };
-//   }
+  //   {
+  //       params,
+  //   }: {
+  //     params: { slug: string };
+  //   }
   //   const article = await getArticle(params.slug);
   const article = {
     title: 'Sample Article',

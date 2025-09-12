@@ -1,10 +1,16 @@
 'use client';
 
-import { ThemeProvider } from 'next-themes';
-import { ReactNode, useEffect, useState } from 'react';
+import { Provider } from 'react-redux';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { Toaster } from '@/components/ui/sonner';
+import store from '@/stores/store';
+import { useEffect, useState } from 'react';
 
-const Providers = ({ children }: { children: ReactNode }) => {
+export default function Providers({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
+  const [queryClient] = useState(() => new QueryClient());
 
   // 클라이언트에서만 렌더링 보장
   useEffect(() => setMounted(true), []);
@@ -12,10 +18,14 @@ const Providers = ({ children }: { children: ReactNode }) => {
   if (!mounted) return null;
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      {children}
-    </ThemeProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          {children}
+          <Toaster />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </Provider>
   );
-};
-
-export default Providers;
+}

@@ -1,22 +1,16 @@
-'use client';
-
 import './globals.css';
-import { Provider } from 'react-redux';
 import { Geist, Geist_Mono } from 'next/font/google';
-import store from '@/stores/store';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Providers from './providers';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { Toaster } from '@/components/ui/sonner';
 
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import 'dayjs/locale/ko'; // 한국어 로케일 가져오기
-dayjs.locale('ko'); //
+import 'dayjs/locale/ko';
+
+dayjs.locale('ko');
 dayjs.extend(utc);
 dayjs.extend(timezone);
-dayjs.tz.setDefault('Asia/Seoul'); // 디폴트
+dayjs.tz.setDefault('Asia/Seoul');
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -28,31 +22,20 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const queryClient = new QueryClient();
-
-const RootLayout = ({
+export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) => {
+}) {
   return (
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <html lang="ko" suppressHydrationWarning>
-          <TooltipProvider>
-            <body
-              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            >
-              <Providers>
-                <main>{children}</main>
-                <Toaster />
-              </Providers>
-            </body>
-          </TooltipProvider>
-        </html>
-      </QueryClientProvider>
-    </Provider>
+    <html lang="ko" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <Providers>
+          <main>{children}</main>
+        </Providers>
+      </body>
+    </html>
   );
-};
-
-export default RootLayout;
+}

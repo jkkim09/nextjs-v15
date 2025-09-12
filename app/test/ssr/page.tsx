@@ -21,7 +21,6 @@ export const metadata: Metadata = {
 };
 
 const SSRPage = () => {
-  console.log('SSR -----');
   return (
     <div>
       <h1>SSR PAGE</h1>
