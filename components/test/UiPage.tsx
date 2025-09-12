@@ -30,8 +30,8 @@ import useTopButton from '@/hooks/common/useTopButton';
 import useViewPositionScroll from '@/hooks/common/useViewPositionScroll';
 import useScrollDirection from '@/hooks/common/useScrollDirection';
 import Hr from '@/components/common/Hr';
-import TestDnd from '@/components/common/TestComponent';
 import { useRouter } from 'next/navigation';
+import { sendGAEvent } from '@next/third-parties/google';
 
 interface RowData {
   id: number;
@@ -155,6 +155,15 @@ const UiPage = () => {
 
   const componentNameTest: ComponentName = 'AModule';
 
+  const ga4HandleClick = () => {
+    sendGAEvent({
+      action: 'click',
+      category: 'button',
+      label: 'signup_button',
+    });
+    console.log('test click ga4');
+  };
+
   return (
     <div className="flex flex-col p-[100px]">
       <h1 className="text-large">TEST</h1>
@@ -235,12 +244,12 @@ const UiPage = () => {
         TEST H1
       </h1>
       <div className="card">Card Theme</div>
-      {/* <Editor
+      <Editor
         defaultValue={editValue}
         onChange={(e) => {
           setEditValue(e);
         }}
-      /> */}
+      />
       <Button
         onClick={() => {
           console.log('getImageId(editValue)', getImageId(editValue));
@@ -394,6 +403,10 @@ const UiPage = () => {
       >
         Agent Fetch
       </Button>
+      {/*  */}
+      <Button onClick={ga4HandleClick}>GA4</Button>
+      {/* Datadog RUM  */}
+      <button data-dd-action-name="cta_button_clicked">Click Me</button>
     </div>
   );
 };

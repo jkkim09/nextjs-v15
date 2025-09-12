@@ -1,11 +1,13 @@
 import './globals.css';
 import { Geist, Geist_Mono } from 'next/font/google';
+// import { GoogleAnalytics } from '@next/third-parties/google';
 import Providers from './providers';
 
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import 'dayjs/locale/ko';
+// import DatadogRum from '@/components/DatadogRum';
 
 dayjs.locale('ko');
 dayjs.extend(utc);
@@ -28,14 +30,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Providers>
-          <main>{children}</main>
-        </Providers>
-      </body>
-    </html>
+    <>
+      <html lang="ko" suppressHydrationWarning>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          {/* Google Analytics */}
+          {/* <GoogleAnalytics gaId="G-9VS4JMKB47" /> */}
+          {/* DatadogRum  */}
+          {/* <DatadogRum /> */}
+          <Providers>
+            <main>{children}</main>
+          </Providers>
+        </body>
+      </html>
+    </>
   );
 }
