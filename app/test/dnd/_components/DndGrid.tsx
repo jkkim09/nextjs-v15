@@ -41,17 +41,20 @@ const SortableItem = (props: {
   const full = props.id === '13';
 
   const style: React.CSSProperties = {
+    // Style 1
     // transform: CSS.Transform.toString(transform),
-    // transition: props.isOverlay ? undefined : transition, // overlay는 transition 불필요
-
+    // transition: props.isOverlay ? undefined : transition,
+    // backgroundColor: isDragging || props.isOverlay ? '#ff7675' : '#74b9ff',
+    // Style 2
     transform: props.isOverlay ? undefined : CSS.Transform.toString(transform),
     transition: props.isOverlay ? undefined : transition,
+    backgroundColor: props.isOverlay ? '#ff7675' : '#74b9ff',
     opacity: isDragging ? 0 : 1,
     //
     width: isWide ? '210px' : full ? '210px' : '100px',
     height: isTall ? '210px' : full ? '210px' : '100px',
     borderRadius: '12px',
-    backgroundColor: props.isOverlay ? '#ff7675' : '#74b9ff',
+
     color: '#fff',
     fontSize: '20px',
     fontWeight: 'bold',
@@ -61,20 +64,41 @@ const SortableItem = (props: {
     boxShadow: props.isOverlay
       ? '0 8px 16px rgba(0,0,0,0.25)'
       : '0 2px 6px rgba(0,0,0,0.15)',
-    cursor: 'grab',
-    // zIndex is important for the drag overlay to be on top
+    cursor: 'default',
     zIndex: props.isOverlay ? 999 : 'auto',
     gridColumn: isWide ? 'span 2' : full ? 'span 2' : undefined,
     gridRow: isTall ? 'span 2' : full ? 'span 2' : undefined,
+    position: 'relative',
+  };
+
+  const handleStyle: React.CSSProperties = {
+    position: 'absolute',
+    top: '5px',
+    right: '5px',
+    width: '20px',
+    height: '20px',
+    backgroundColor: '#fff',
+    borderRadius: '50%',
+    cursor: 'grab',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#333',
+    fontSize: '12px',
+    fontWeight: 'normal',
   };
 
   return (
-    <div
-      ref={props.isOverlay ? undefined : setNodeRef}
-      style={style}
-      {...(!props.isOverlay ? attributes : {})}
-      {...(!props.isOverlay ? listeners : {})}
-    >
+    <div ref={props.isOverlay ? undefined : setNodeRef} style={style}>
+      <div
+        style={handleStyle}
+        {...(!props.isOverlay ? attributes : {})}
+        {...(!props.isOverlay ? listeners : {})}
+      >
+        <span role="img" aria-label="drag handle">
+          🖐️
+        </span>
+      </div>
       {props.value}
     </div>
   );
