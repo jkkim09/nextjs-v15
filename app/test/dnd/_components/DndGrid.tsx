@@ -41,24 +41,29 @@ const SortableItem = (props: {
   const full = props.id === '13';
 
   const style: React.CSSProperties = {
-    transform: CSS.Transform.toString(transform),
-    transition: props.isOverlay ? undefined : transition, // overlay는 transition 불필요
+    // transform: CSS.Transform.toString(transform),
+    // transition: props.isOverlay ? undefined : transition, // overlay는 transition 불필요
+
+    transform: props.isOverlay ? undefined : CSS.Transform.toString(transform),
+    transition: props.isOverlay ? undefined : transition,
+    opacity: isDragging ? 0 : 1,
+    //
     width: isWide ? '210px' : full ? '210px' : '100px',
     height: isTall ? '210px' : full ? '210px' : '100px',
     borderRadius: '12px',
-    backgroundColor: isDragging || props.isOverlay ? '#ff7675' : '#74b9ff',
+    backgroundColor: props.isOverlay ? '#ff7675' : '#74b9ff',
     color: '#fff',
     fontSize: '20px',
     fontWeight: 'bold',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow:
-      isDragging || props.isOverlay
-        ? '0 8px 16px rgba(0,0,0,0.25)'
-        : '0 2px 6px rgba(0,0,0,0.15)',
+    boxShadow: props.isOverlay
+      ? '0 8px 16px rgba(0,0,0,0.25)'
+      : '0 2px 6px rgba(0,0,0,0.15)',
     cursor: 'grab',
-    zIndex: isDragging ? 999 : 'auto',
+    // zIndex is important for the drag overlay to be on top
+    zIndex: props.isOverlay ? 999 : 'auto',
     gridColumn: isWide ? 'span 2' : full ? 'span 2' : undefined,
     gridRow: isTall ? 'span 2' : full ? 'span 2' : undefined,
   };
@@ -117,7 +122,6 @@ const DndGrid = () => {
           style={{
             maxWidth: '210px',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))',
             gap: '5px',
             justifyItems: 'center',
           }}
