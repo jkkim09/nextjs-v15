@@ -1,3 +1,4 @@
+import { fetchWithInterceptor } from '@/apis/fetchWithInterceptor';
 import UiPage from '@/components/test/UiPage';
 
 import { Metadata } from 'next';
@@ -9,7 +10,11 @@ export const metadata: Metadata = {
   },
 };
 
-const UiTestPage = () => {
+const UiTestPage = async () => {
+  const { data } = await fetchWithInterceptor<{
+    data: { ip: '::1' };
+  }>('/api/agent');
+  console.log('res --------', data);
   return <UiPage />;
 };
 

@@ -33,6 +33,7 @@ import Hr from '@/components/common/Hr';
 import { useRouter } from 'next/navigation';
 import { sendGAEvent } from '@next/third-parties/google';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { fetchWithInterceptor } from '@/apis/fetchWithInterceptor';
 
 interface RowData {
   id: number;
@@ -405,8 +406,12 @@ const UiPage = () => {
       <Button disabled={true}>Disabled</Button>
       {/*  */}
       <Button
-        onClick={() => {
-          fetch('/api/agent');
+        onClick={async () => {
+          // fetch('/api/agent');
+          const { data } = await fetchWithInterceptor<{
+            data: { ip: '::1' };
+          }>('/api/agent');
+          console.log('data', data);
         }}
       >
         Agent Fetch
