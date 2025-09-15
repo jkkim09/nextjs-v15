@@ -11,6 +11,7 @@ import {
 } from 'dnd-kit-sortable-tree';
 import React from 'react';
 import { useState } from 'react';
+import DndGrid from './_components/DndGrid';
 
 type MinimalTreeItemData = {
   value: string;
@@ -84,6 +85,10 @@ const DnDPage = () => {
           onItemsChanged={setSortItems}
           TreeItemComponent={TreeItem}
         />
+      </section>
+      {/*  */}
+      <section>
+        <DndGrid />
       </section>
     </div>
   );
