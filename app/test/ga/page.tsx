@@ -2,7 +2,8 @@
 
 import Button from '@/components/common/Button';
 import { sendAnalyticsEvent } from '@/utils/analytics';
-import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
+import { sendGAEvent } from '@next/third-parties/google';
+import Link from 'next/link';
 
 const GaPage = () => {
   return (
@@ -26,7 +27,6 @@ const GaPage = () => {
         ): void
       */}
       <Button
-        //   onClick={() => sendGAEvent({ event: 'buttonClicked', value: 'xyz' })}
         onClick={() => sendGAEvent('event', 'buttonClicked', { value: 123 })}
       >
         GA Click
@@ -41,6 +41,7 @@ const GaPage = () => {
       >
         GA GTA
       </Button>
+      <Link href={'/'}>Root Page</Link>
     </section>
   );
 };

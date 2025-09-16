@@ -8,7 +8,7 @@ const PageViewTracker = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    sendGAEvent('page_view', {
+    sendGAEvent('event', 'page_view', {
       page_path: pathname,
       page_location: window.location.href,
       page_title: document.title,
