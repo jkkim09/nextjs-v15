@@ -8,7 +8,6 @@ import 'dayjs/locale/ko';
 
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import DatadogRum from '@/components/DatadogRum';
-import PageViewTracker from '@/components/PageViewTracker';
 
 dayjs.locale('ko');
 dayjs.extend(utc);
