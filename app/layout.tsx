@@ -6,8 +6,9 @@ import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import 'dayjs/locale/ko';
 
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import DatadogRum from '@/components/DatadogRum';
+import PageViewTracker from '@/components/PageViewTracker';
 
 dayjs.locale('ko');
 dayjs.extend(utc);
@@ -36,9 +37,12 @@ export default function RootLayout({
       >
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+          <>
+            <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GA_ID} />
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+            <PageViewTracker />
+          </>
         )}
-        {/* <GoogleAnalytics gaId="G-9VS4JMKB47" /> */}
         {process.env.NEXT_PUBLIC_DD_APP_ID && <DatadogRum />}
         <Providers>
           <main>{children}</main>

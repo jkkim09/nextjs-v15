@@ -1,7 +1,8 @@
 'use client';
 
 import Button from '@/components/common/Button';
-import { sendGAEvent } from '@next/third-parties/google';
+import { sendAnalyticsEvent } from '@/utils/analytics';
+import { sendGAEvent, sendGTMEvent } from '@next/third-parties/google';
 
 const GaPage = () => {
   return (
@@ -29,6 +30,16 @@ const GaPage = () => {
         onClick={() => sendGAEvent('event', 'buttonClicked', { value: 123 })}
       >
         GA Click
+      </Button>
+      <Button
+        onClick={() => {
+          sendAnalyticsEvent({
+            name: 'purchase',
+            params: { transaction_id: 'T123', value: 100, currency: 'KRW' },
+          });
+        }}
+      >
+        GA GTA
       </Button>
     </section>
   );

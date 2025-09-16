@@ -35,9 +35,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const SSRPage = async ({ params }: PageProps) => {
   const url = await getServerSideUrlPath();
+  const { title, description } = await getTestApi();
   const jsonLd = createBlogJsonLd({
-    headline: 'Next.js 15과 GEO 최적화 가이드',
-    description: 'Generative Engine Optimization(GEO)와 JSON-LD 활용법',
+    headline: title,
+    description: description,
     author: { name: '홍길동', url: url },
     datePublished: '2025-09-16',
     dateModified: '2025-09-16',
