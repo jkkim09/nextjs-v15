@@ -34,6 +34,7 @@ import { useRouter } from 'next/navigation';
 import { sendGAEvent } from '@next/third-parties/google';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { fetchWithInterceptor } from '@/apis/fetchWithInterceptor';
+import { sendAnalyticsEvent } from '@/utils/analytics';
 
 interface RowData {
   id: number;
@@ -411,6 +412,12 @@ const UiPage = () => {
           const { data } = await fetchWithInterceptor<{
             data: { ip: '::1' };
           }>('/api/agent');
+          sendAnalyticsEvent({
+            name: 'click',
+            params: {
+              info: 'IP 요청',
+            },
+          });
           console.log('data', data);
         }}
       >
