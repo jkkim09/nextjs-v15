@@ -37,12 +37,16 @@ export default function RootLayout({
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
-            <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GA_ID} />
             <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-            {/* 이미 자동으로 보내고 있음 */}
+            {/* 이미 자동으로 보내고 있음 수동 사용시 config false 필요 */}
             {/* <PageViewTracker /> */}
           </>
         )}
+
+        {process.env.NEXT_PUBLIC_GTA_ID && (
+          <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTA_ID} />
+        )}
+
         {process.env.NEXT_PUBLIC_DD_APP_ID && <DatadogRum />}
         <Providers>
           <main>{children}</main>

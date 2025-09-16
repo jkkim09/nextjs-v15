@@ -43,13 +43,13 @@ export function sendAnalyticsEvent(event: AnalyticsEvent) {
   if (typeof window === 'undefined') return;
 
   // GA 전송
-  if (event.name) {
+  if (event.name && process.env.NEXT_PUBLIC_GA_ID) {
     _sendGAEvent('event', event.name, event.params);
   }
 
   // GTM 전송
   const gtmEventName = event.event || event.name;
-  if (gtmEventName) {
+  if (gtmEventName && process.env.NEXT_PUBLIC_GTA_ID) {
     const gtmData = event.data || mapGAParamsToGTMData(event.params);
     _sendGTMEvent({ event: gtmEventName, ...(gtmData || {}) });
   }

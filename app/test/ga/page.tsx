@@ -27,14 +27,20 @@ const GaPage = () => {
         ): void
       */}
       <Button
-        onClick={() => sendGAEvent('event', 'buttonClicked', { value: 123 })}
+        onClick={() =>
+          sendGAEvent('event', 'buttonClicked', {
+            transaction_id: 'T133',
+            value: 30000000,
+            currency: 'KRW',
+          })
+        }
       >
         GA Click
       </Button>
       <Button
         onClick={() => {
           sendAnalyticsEvent({
-            name: 'purchase',
+            name: 'buttonClicked',
             params: { transaction_id: 'T123', value: 100, currency: 'KRW' },
           });
         }}
