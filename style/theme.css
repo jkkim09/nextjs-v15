@@ -87,6 +87,8 @@
 
 /* root 변수 */
 :root {
+  /* localFont로 만든 CSS 변수 사용 */
+  --font-pretendard: 'Pretendard', sans-serif;
   /* --font-display: 'Satoshi', 'sans-serif'; */
   --primary-base: #bbeee6;
   --radius: 0.625rem;

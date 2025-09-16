@@ -9,6 +9,7 @@ const GaPage = () => {
   return (
     <section>
       <h1>GA Page</h1>
+      <h2 className="font-bold">GA 페이지 테스트</h2>
       {/* 
         sendGAEvent 함수는 dataLayer 객체를 사용하여 이벤트를
         전송함으로써 페이지에서 사용자 상호작용을 측정하는 데 사용할 수 있습니다.   

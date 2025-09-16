@@ -12,7 +12,8 @@
 body {
   color: var(--color-foreground);
   background: var(--color-background);
-  font-family: system-ui, sans-serif, Helvetica, Arial;
+  /* font-family: system-ui, sans-serif, Helvetica, Arial; */
+  font-family: var(--font-pretendard);
 }
 
 * {
