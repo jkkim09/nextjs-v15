@@ -1,3 +1,4 @@
+import { createBlogJsonLd } from '@/util/createJsonLd';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -21,10 +22,28 @@ export const metadata: Metadata = {
 };
 
 const SSRPage = () => {
+  const jsonLd = createBlogJsonLd({
+    headline: 'Next.js 15과 GEO 최적화 가이드',
+    description: 'Generative Engine Optimization(GEO)와 JSON-LD 활용법',
+    author: { name: '홍길동', url: 'https://example.com/about' },
+    datePublished: '2025-09-16',
+    dateModified: '2025-09-16',
+    url: 'https://example.com/blog/nextjs15-geo',
+    image: ['https://example.com/images/ga4-guide.png'],
+    keywords: ['Next.js', 'SEO', 'GEO', 'JSON-LD'],
+    publisher: { name: 'My Blog', logo: 'https://example.com/logo.png' },
+  });
+
   return (
-    <div>
-      <h1>SSR PAGE</h1>
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
+      />
+      <div>
+        <h1>SSR PAGE</h1>
+      </div>
+    </>
   );
 };
 

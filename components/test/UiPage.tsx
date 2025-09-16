@@ -159,7 +159,7 @@ const UiPage = () => {
   const componentNameTest: ComponentName = 'AModule';
 
   const ga4HandleClick = () => {
-    sendGAEvent({
+    sendGAEvent('click-event', {
       action: 'click',
       category: 'button',
       label: 'signup_button',
