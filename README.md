@@ -134,6 +134,8 @@ docker run -d -p 3000:3000 [image-id]
 
 ## SEO
 
+https://search.google.com/test/rich-results 에서 테스트
+
 ```txt
 
 # app/robots.txt
