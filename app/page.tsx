@@ -1,3 +1,9 @@
+export async function generateMetadata() {
+  return {
+    title: '메인 페이지',
+  };
+}
+
 const MainPage = () => {
   return (
     <section>
